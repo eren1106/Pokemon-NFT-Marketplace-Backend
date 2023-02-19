@@ -9,39 +9,7 @@ import Pokemon, { IPokemonModel } from '../models/Pokemon';
 // });
 
 const createPokemon = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    const {
-        name,
-        no,
-        index,
-        types,
-        level,
-        atk,
-        def,
-        hp,
-        imgUrl,
-        price,
-        prevPrice,
-        ownerID
-    } = req.body;
-
-    const pokemon = new Pokemon({
-        _id: new mongoose.Types.ObjectId(),
-        name,
-        no,
-        index,
-        types,
-        level,
-        atk,
-        def,
-        hp,
-        imgUrl,
-        price,
-        prevPrice,
-        ownerID
-    });
-
-    await pokemon.save();
-
+    const pokemon = await Pokemon.create(req.body);
     res.status(200).json(pokemon);
 });
 
