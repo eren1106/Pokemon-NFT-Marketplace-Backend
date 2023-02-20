@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IPokemon {
     name: string,
-    no: string,
+    no: number,
     index: number,
     types: Array<string>,
     level: number,
@@ -21,7 +21,7 @@ export interface IPokemonModel extends IPokemon, Document {}
 const PokemonSchema: Schema = new Schema(
     {
         name: { type: String, required: true },
-        no: { type: String, required: true },
+        no: { type: Number, required: true },
         index: { type: Number, required: true },
         types: { type: Array<String>, required: true},
         level: { type: Number, required: true },
