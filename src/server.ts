@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
 import pokemonRoutes from './routes/pokemonRoute';
+import userRoutes from './routes/userRoute';
+
 import cors from 'cors';
 
 dotenv.config();
@@ -18,6 +20,7 @@ app.use(express.json()); // used to parse incoming JSON data and add it to the r
 app.use(express.urlencoded({ extended: false })); // used to parse incoming urlencoded data and add it to the request.body object.
 
 app.use('/api/pokemons', pokemonRoutes);
+app.use('/api/auth', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('testing123');

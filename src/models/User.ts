@@ -16,7 +16,7 @@ const UserSchema: Schema = new Schema(
         email: { type: String, required: true },
         password: { type: String, required: true },
         coins: { type: Number, required: true },
-        pokemons: { type: String, required: true },
+        pokemons: { type: Array<String>, required: true },
     },
     {
         timestamps: true,
