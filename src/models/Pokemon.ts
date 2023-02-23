@@ -14,6 +14,7 @@ export interface IPokemon {
     price: number,
     prevPrice?: number,
     ownerID?: string,
+    forSale: boolean,
 }
 
 export interface IPokemonModel extends IPokemon, Document {}
@@ -32,7 +33,8 @@ const PokemonSchema: Schema = new Schema(
         imgUrl: { type: String, required: true },
         price: { type: Number, required: true },
         prevPrice: { type: Number },
-        ownerID: { type: Schema.Types.ObjectId, ref: 'User' }
+        ownerID: { type: Schema.Types.ObjectId, ref: 'User' },
+        forSale: { type: Boolean, required: true }
     },
     {
         timestamps: true,
