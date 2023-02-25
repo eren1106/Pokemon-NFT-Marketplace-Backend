@@ -25,6 +25,7 @@ export const buyPokemon = asyncHandler(async (req: Request, res: Response): Prom
     const updatedPokemon = await Pokemon.findByIdAndUpdate(pokemonId, {
         forSale: false,
         owner: buyerId,
+        prevPrice: price,
     }, { new: true });
 
     const updatedBuyer = await User.findByIdAndUpdate(buyerId, {
@@ -41,4 +42,15 @@ export const buyPokemon = asyncHandler(async (req: Request, res: Response): Prom
     }
 
     res.status(200).json({ updatedPokemon, updatedBuyer, updatedSeller });
+});
+
+export const sellPokemon = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { pokemonId, price } = req.body;
+
+    const updatedPokemon = await Pokemon.findByIdAndUpdate(pokemonId, {
+        forSale: true,
+        price,
+    }, { new: true });
+
+    res.status(200).json(updatedPokemon);
 });
