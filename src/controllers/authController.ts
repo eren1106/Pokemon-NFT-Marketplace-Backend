@@ -6,7 +6,12 @@ import { hash, compare } from 'bcrypt';
 export const register = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { name, email, password } = req.body;
 
-    // TODO: Check if email duplicated
+    // Check if email duplicated
+    const existingUser = await User.findOne({email});
+    if(existingUser) {
+        res.status(409).json("Email existed");
+        return;
+    }
 
     const saltRounds = 10;
     const hashedPassword = await hash(password, saltRounds);

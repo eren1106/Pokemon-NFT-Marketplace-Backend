@@ -24,7 +24,7 @@ export const buyPokemon = asyncHandler(async (req: Request, res: Response): Prom
 
     const updatedPokemon = await Pokemon.findByIdAndUpdate(pokemonId, {
         forSale: false,
-        owner: buyerId,
+        ownerID: buyerId,
         prevPrice: price,
     }, { new: true });
 
