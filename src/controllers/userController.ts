@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import User, { IUser } from '../models/User';
-import { hash, compare } from 'bcrypt';
+import User from '../models/User';
 
 export const getUserById = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
