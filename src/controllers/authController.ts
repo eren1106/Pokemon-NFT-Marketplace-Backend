@@ -21,6 +21,7 @@ export const register = asyncHandler(async (req: Request, res: Response): Promis
         password: hashedPassword,
         coins: 100,
         pokemons: [],
+        favourites: [],
     }
     const user = await User.create(newUser);
     res.status(200).json(user);

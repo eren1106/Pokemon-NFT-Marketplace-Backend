@@ -5,7 +5,8 @@ export interface IUser {
     email: string,
     password: string,
     coins: number,
-    pokemons: Array<string>
+    pokemons: Array<string>,
+    favourites: Array<string>,
 }
 
 export interface IUserModel extends IUser, Document {}
@@ -17,6 +18,7 @@ const UserSchema: Schema = new Schema(
         password: { type: String, required: true },
         coins: { type: Number, required: true },
         pokemons: { type: Array<String>, required: true },
+        favourites: { type: Array<String>, required: true },
     },
     {
         timestamps: true,
