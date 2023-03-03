@@ -57,10 +57,28 @@ export const buyPokemon = asyncHandler(async (req: Request, res: Response): Prom
 export const sellPokemon = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { pokemonId, price } = req.body;
 
-    const updatedPokemon = await Pokemon.findByIdAndUpdate(pokemonId, {
-        forSale: true,
-        price,
-    }, { new: true });
+    const pokemon = await Pokemon.findById(pokemonId);
+
+    if(!pokemon) {
+        res.status(404).json("Pokemon not found!");
+        return;
+    }
+
+    let updatedPokemon;
+
+    if(pokemon.forSale) { // cancel sell
+        updatedPokemon = await Pokemon.findByIdAndUpdate(pokemonId, {
+            forSale: false,
+            price: pokemon.prevPrice,
+        }, { new: true });
+    }
+    else { // sell
+        updatedPokemon = await Pokemon.findByIdAndUpdate(pokemonId, {
+            forSale: true,
+            price,
+        }, { new: true });
+    }
+    
 
     res.status(200).json(updatedPokemon);
 });
