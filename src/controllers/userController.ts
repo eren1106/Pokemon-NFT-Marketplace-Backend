@@ -7,3 +7,30 @@ export const getUserById = asyncHandler(async (req: Request, res: Response): Pro
     const user = await User.findById(id);
     res.status(200).json(user);
 });
+
+export const togglePokemonFavourite = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+    const { pokemonId } = req.body;
+
+    const user = await User.findById(id);
+
+    if(!user) {
+        res.status(404).json("Pokemon not found!");
+        return;
+    }
+
+    let updatedUser;
+
+    if(user.favourites.includes(pokemonId)) { // remove pokemon from favourites
+        updatedUser = await User.findByIdAndUpdate(id, {
+            $pull: { favourites: pokemonId },
+        }, { new: true });
+    }
+    else {
+        updatedUser = await User.findByIdAndUpdate(id, { // add pokemon to favourites
+            $push: { favourites: pokemonId },
+        }, { new: true });
+    }
+
+    res.status(200).json(updatedUser);
+});

@@ -24,6 +24,16 @@ export const getPokemonsByUserId = asyncHandler(async (req: Request, res: Respon
     res.status(404).json("User not found!");
 });
 
+export const getPokemonsByFavourites = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if(user) {
+        const pokemons = await Pokemon.find({ _id: { $in: user.favourites } });
+        res.status(200).json(pokemons);
+    }
+    res.status(404).json("User not found!");
+});
+
 export const createPokemon = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const pokemon = await Pokemon.create(req.body);
     res.status(200).json(pokemon);
