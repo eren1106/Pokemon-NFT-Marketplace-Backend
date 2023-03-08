@@ -22,6 +22,7 @@ export const register = asyncHandler(async (req: Request, res: Response): Promis
         coins: 100,
         pokemons: [],
         favourites: [],
+        bio: "This user hasn't written a bio yet.",
     }
     const user = await User.create(newUser);
     res.status(200).json(user);
