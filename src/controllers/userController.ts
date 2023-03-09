@@ -34,3 +34,10 @@ export const togglePokemonFavourite = asyncHandler(async (req: Request, res: Res
 
     res.status(200).json(updatedUser);
 });
+
+export const updateUserById = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+    const object = req.body;
+    const user = await User.findByIdAndUpdate(id, object);
+    res.status(200).json(user);
+});
