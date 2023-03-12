@@ -41,16 +41,6 @@ export const getPokemonsByRandom = asyncHandler(async (req: Request, res: Respon
 
   const pokemons: IPokemonModel[] = await Pokemon.find();
   const getPokemons: IPokemonModel[] = [];
-
-  // const shufflePokemons = async (p: IPokemonModel[]) => {
-  //   const sortedArray = await Promise.resolve([...p].sort((a: IPokemonModel, b: IPokemonModel) => {
-  //     if (legendaryPokemonList.includes(a.no) && !legendaryPokemonList.includes(b.no)) return -1;
-  //     if (!legendaryPokemonList.includes(a.no) && legendaryPokemonList.includes(b.no)) return 1;
-  //     return 0.5 - Math.random();
-  //   }));
-  //   return sortedArray;
-  // }
-  // const shuffledPokemons = await shufflePokemons(pokemons);
   
   const shuffledPokemons = pokemons.sort((a: IPokemonModel, b: IPokemonModel) => {
     if (legendaryPokemonList.includes(a.no) && !legendaryPokemonList.includes(b.no)) return -1;
