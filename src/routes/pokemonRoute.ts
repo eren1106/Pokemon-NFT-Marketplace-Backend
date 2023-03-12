@@ -1,9 +1,10 @@
 import express from 'express';
-import { buyPokemon, createPokemon, getAllPokemons, getPokemonById, getPokemonsByFavourites, getPokemonsByUserId, sellPokemon } from '../controllers/pokemonController';
+import { buyPokemon, createPokemon, getAllPokemons, getPokemonById, getPokemonsByFavourites, getPokemonsByRandom, getPokemonsByUserId, sellPokemon } from '../controllers/pokemonController';
 
 const router = express.Router();
 
 router.get('/', getAllPokemons);
+router.get('/random', getPokemonsByRandom);
 router.get('/:id', getPokemonById);
 router.get('/user/:userId', getPokemonsByUserId);
 router.get('/user/:userId/favourites', getPokemonsByFavourites);
